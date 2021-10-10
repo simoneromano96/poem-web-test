@@ -4,7 +4,9 @@ use async_graphql::SimpleObject;
 use poem_openapi::Object;
 use sea_orm::entity::prelude::*;
 
-#[derive(Clone, Debug, PartialEq, DeriveEntityModel, SimpleObject, Object)]
+use crate::functions::get_db::get_db;
+
+#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
 #[sea_orm(table_name = "todo")]
 pub struct Model {
     #[sea_orm(primary_key)]
@@ -28,13 +30,13 @@ impl ActiveModelBehavior for ActiveModel {}
 
 #[derive(Debug, Clone, Eq, PartialEq, SimpleObject, Object)]
 pub struct TodoDAO {
-    id: i32,
-    name: String,
-    description: Option<String>,
+    pub id: i32,
+    pub name: String,
+    pub description: Option<String>,
 }
 
-impl From<Model> for TodoDAO {
-    fn from(model: Model) -> Self {
+impl TodoDAO {
+    fn from_model(model: Model) -> Self {
         Self {
             id: model.id,
             name: model.name,
@@ -43,7 +45,8 @@ impl From<Model> for TodoDAO {
     }
 }
 
-// impl From<Vec<Model>> for Vec<TodoDAO> {
-//     fn from(model: Model) -> Vec<TodoDAO> {
-//     }
-// }
+pub async fn get_todos() -> Result<Vec<TodoDAO>, DbErr> {
+    let db = get_db().await;
+    let todos: Vec<Model> = Entity::find().all(db).await?;
+    Ok(todos.into_iter().map(|todo| TodoDAO::from_model(todo)).collect())
+}
