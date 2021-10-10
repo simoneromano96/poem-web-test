@@ -18,10 +18,14 @@ opentelemetry-jaeger = { version = "0.15.0", features = ["rt-tokio"] }
 poem = "1.0.0"
 # OpenAPI for poem
 poem-openapi = "1.0.0"
+# ORM (based on sqlx)
+sea-orm = { version = "0.2.6", features = ["debug-print", "sqlx-postgres", "runtime-tokio-rustls"] }
 # Tokio runtime
 tokio = { version = "1.12.0", features = ["full"] }
 # Tracing
 tracing = "0.1.29"
+# Log adapter (sqlx, sea-orm)
+tracing-log = "0.1.2"
 # Opentelemetry adapter
 tracing-opentelemetry = "0.15.0"
 # Trace collector

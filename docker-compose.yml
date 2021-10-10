@@ -1,0 +1,27 @@
+version: "3.6"
+
+services:
+  # Tracing
+  jaeger:
+    image: jaegertracing/all-in-one
+    ports:
+      # Collector
+      - 6831:6831/udp
+      - 6832:6832/udp
+      # UI
+      - 16686:16686
+
+  # Postgres DB
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: poem_test
+      POSTGRES_USER: poem_test
+      POSTGRES_PASSWORD: poem_test
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
