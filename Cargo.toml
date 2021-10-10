@@ -6,17 +6,23 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+# GraphQL library
+async-graphql = { version = "2.10.2", features = ["tracing"] }
+# GraphQL poem adapter
+async-graphql-poem = "2.10.2"
 # Opentelemetry
 opentelemetry = { version = "0.16.0", features = ["rt-tokio"] }
 # Jaeger connector
 opentelemetry-jaeger = { version = "0.15.0", features = ["rt-tokio"] }
 # HTTP Server
 poem = "1.0.0"
-# OpenAPI
+# OpenAPI for poem
 poem-openapi = "1.0.0"
 # Tokio runtime
 tokio = { version = "1.12.0", features = ["full"] }
 # Tracing
 tracing = "0.1.29"
+# Opentelemetry adapter
 tracing-opentelemetry = "0.15.0"
+# Trace collector
 tracing-subscriber = "0.2.25"
