@@ -12,13 +12,20 @@ services:
       - 16686:16686
 
   # OpenAPI UI
-  redoc:
-    image: redocly/redoc
-    environment:
-      SPEC_URL: http://localhost:3000/spec 
-    ports:
-      - 8080:80
+  # redoc:
+  #   image: redocly/redoc
+  #   environment:
+  #     SPEC_URL: http://localhost:3000/spec 
+  #   ports:
+  #     - 8080:80
 
+  # OpenAPI UI
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    environment:
+      SWAGGER_JSON_URL: http://localhost:3000/spec
+    ports:
+      - 8080:8080
 
   # Postgres DB
   postgres:

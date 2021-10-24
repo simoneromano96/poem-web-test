@@ -10,6 +10,8 @@ edition = "2021"
 async-graphql = { version = "2.10.5", features = ["tracing"] }
 # GraphQL poem adapter
 async-graphql-poem = "2.10.5"
+# Random id
+nanoid = "0.4.0"
 # Opentelemetry
 opentelemetry = { version = "0.16.0", features = ["rt-tokio"] }
 # Jaeger connector
@@ -20,6 +22,8 @@ poem = { version = "1.0.7", default_features = false, features = [] }
 poem-openapi = { version = "1.0.7", default_features = false, features = [] }
 # ORM (based on sqlx)
 sea-orm = { version = "0.3.1", features = ["debug-print", "sqlx-postgres", "runtime-tokio-rustls"] }
+# Error handling
+thiserror = "1.0.30"
 # Tokio runtime
 tokio = { version = "1.12.0", features = ["full"] }
 # Tracing
