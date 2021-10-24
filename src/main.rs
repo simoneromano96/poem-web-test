@@ -9,12 +9,13 @@ use async_graphql::{
 use functions::{get_db::get_db, init_tracing::init_tracing};
 use graphql::todo::QueryRoot;
 use poem::{
-    handler,
+    get, handler,
     listener::TcpListener,
     post,
     web::{Data, Json},
-    EndpointExt, Route,
+    EndpointExt, Response as PoemResponse, Route,
 };
+use poem::{http::Method, middleware::Cors};
 use poem_openapi::OpenApiService;
 use routes::todo::TodoAPI;
 use tracing::debug;
@@ -27,6 +28,14 @@ async fn graphql_handler(schema: Data<&GraphQlSchema>, req: Json<Request>) -> Js
     Json(schema.execute(req.0).await)
 }
 
+#[handler]
+async fn spec_handler(spec: Data<&String>) -> PoemResponse {
+    let spec = spec.0.to_string();
+    PoemResponse::builder()
+        .content_type("application/json")
+        .body(spec)
+}
+
 #[tokio::main]
 async fn main() -> Result<(), std::io::Error> {
     if std::env::var_os("RUST_LOG").is_none() {
@@ -35,7 +44,7 @@ async fn main() -> Result<(), std::io::Error> {
     // Init tracing
     init_tracing();
 
-    // DB first initialization
+    // DB first initialization (this is not strictly necessary, however if the db is not accessible at the start of the application, the application shouldn't start)
     get_db().await;
 
     // GraphQL initialization
@@ -49,10 +58,13 @@ async fn main() -> Result<(), std::io::Error> {
         .server("http://localhost:3000/api");
 
     // SwaggerUI
-    let ui = api_service.swagger_ui("http://localhost:3000");
+    // let ui = api_service.swagger_ui("http://localhost:3000");
+    let spec = api_service.spec();
 
     // HTTP Server
     let listener = TcpListener::bind("127.0.0.1:3000");
+
+    let cors = Cors::new();
 
     poem::Server::new(listener)
         .await?
@@ -60,7 +72,9 @@ async fn main() -> Result<(), std::io::Error> {
             Route::new()
                 .nest("/api", api_service)
                 .nest("/graphql", post(graphql_handler))
-                .nest("/", ui)
+                .nest("/spec", get(spec_handler).with(cors))
+                // .nest("/", ui)
+                .data(spec)
                 .data(schema),
         )
         .await

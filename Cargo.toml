@@ -7,19 +7,19 @@ edition = "2021"
 
 [dependencies]
 # GraphQL library
-async-graphql = { version = "2.10.2", features = ["tracing"] }
+async-graphql = { version = "2.10.5", features = ["tracing"] }
 # GraphQL poem adapter
-async-graphql-poem = "2.10.2"
+async-graphql-poem = "2.10.5"
 # Opentelemetry
 opentelemetry = { version = "0.16.0", features = ["rt-tokio"] }
 # Jaeger connector
 opentelemetry-jaeger = { version = "0.15.0", features = ["rt-tokio"] }
 # HTTP Server
-poem = "1.0.0"
+poem = { version = "1.0.7", default_features = false, features = [] }
 # OpenAPI for poem
-poem-openapi = "1.0.0"
+poem-openapi = { version = "1.0.7", default_features = false, features = [] }
 # ORM (based on sqlx)
-sea-orm = { version = "0.2.6", features = ["debug-print", "sqlx-postgres", "runtime-tokio-rustls"] }
+sea-orm = { version = "0.3.1", features = ["debug-print", "sqlx-postgres", "runtime-tokio-rustls"] }
 # Tokio runtime
 tokio = { version = "1.12.0", features = ["full"] }
 # Tracing
@@ -27,6 +27,6 @@ tracing = "0.1.29"
 # Log adapter (sqlx, sea-orm)
 tracing-log = "0.1.2"
 # Opentelemetry adapter
-tracing-opentelemetry = "0.15.0"
+tracing-opentelemetry = "0.16.0"
 # Trace collector
-tracing-subscriber = "0.2.25"
+tracing-subscriber = "0.3.0"

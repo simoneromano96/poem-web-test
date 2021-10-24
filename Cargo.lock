@@ -87,6 +87,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "aliasable"
+version = "0.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "250f629c0161ad8107cf89319e990051fae62832fd343083bea452d93e2205fd"
+
+[[package]]
 name = "ansi_term"
 version = "0.12.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -155,9 +161,9 @@ dependencies = [
 
 [[package]]
 name = "async-graphql"
-version = "2.10.2"
+version = "2.10.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c8a5bb9cdc45035df039132dd466621e6459f9ac378dc2874ded5254f539c616"
+checksum = "db90708749da7ba77f48d801fb54ee31cd955865c0a54a222f0e19ac065700b7"
 dependencies = [
  "async-graphql-derive",
  "async-graphql-parser",
@@ -185,9 +191,9 @@ dependencies = [
 
 [[package]]
 name = "async-graphql-derive"
-version = "2.10.2"
+version = "2.10.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "99941fdd3b5745f4bd34a3e6b539f6604badd07c15a6a2e915e0e041a09c002e"
+checksum = "aa7e002edba829393e110363d7622162d4a259996a22b6bd5a4975ad0aed2163"
 dependencies = [
  "Inflector",
  "async-graphql-parser",
@@ -201,9 +207,9 @@ dependencies = [
 
 [[package]]
 name = "async-graphql-parser"
-version = "2.10.2"
+version = "2.10.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "aee8226c393b6c834665ebaae398fa9936f7c1af48055f55ce7138af6dfc66e3"
+checksum = "9443f5154cedcf2e2b189083b81f3761ee94c31a1d99c740421cacb8eada323c"
 dependencies = [
  "async-graphql-value",
  "pest",
@@ -214,22 +220,22 @@ dependencies = [
 
 [[package]]
 name = "async-graphql-poem"
-version = "2.10.2"
+version = "2.10.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8e0a00d256cc1fda09471675c937a53df6a3d21a4a45907a749a5b4cffde2856"
+checksum = "84bb5dcd216e4e2d8879387ed2c35e2a861319e209c16845fab871d4fbcdef9f"
 dependencies = [
  "async-graphql",
  "futures-util",
- "poem 0.6.10",
+ "poem",
  "serde_json",
  "tokio-util",
 ]
 
 [[package]]
 name = "async-graphql-value"
-version = "2.10.2"
+version = "2.10.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "568d658bca34d74d4bd3101ee44a0cfb343337534b1ce8de5e2776f74b999f27"
+checksum = "c50fc17991b098c92cc0d8a6f9a1a45090403329898c7a724ac8b833802ad2b1"
 dependencies = [
  "bytes 1.1.0",
  "serde",
@@ -290,7 +296,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ec107f431ee3d8a8e45e6dd117adab769556ef463959e77bf6a4888d5fd500cf"
 dependencies = [
  "heck",
- "proc-macro-error",
+ "proc-macro-error 0.4.12",
  "proc-macro2",
  "quote",
  "syn",
@@ -1165,15 +1171,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3e2e65a1a2e43cfcb47a895c4c8b10d1f4a61097f9f254f183aee60cad9c651d"
 
 [[package]]
-name = "matchers"
-version = "0.0.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f099785f7595cc4b4553a174ce30dd7589ef93391ff414dbb67f62392b9e0ce1"
-dependencies = [
- "regex-automata",
-]
-
-[[package]]
 name = "matches"
 version = "0.1.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1403,6 +1400,30 @@ dependencies = [
 ]
 
 [[package]]
+name = "ouroboros"
+version = "0.11.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3518a68fc597f6a42f83a31e41c039c3cbaa10fa8bb239c936c235e81cce873f"
+dependencies = [
+ "aliasable",
+ "ouroboros_macro",
+ "stable_deref_trait",
+]
+
+[[package]]
+name = "ouroboros_macro"
+version = "0.11.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4e23813b1bcb2d41a838849a2bbae40ae5c03c85ecabf04ba97086f438484714"
+dependencies = [
+ "Inflector",
+ "proc-macro-error 1.0.4",
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "parking_lot"
 version = "0.11.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1510,45 +1531,9 @@ checksum = "8b870d8c151b6f2fb93e84a13146138f05d02ed11c7e7c54f8826aaaf7c9f184"
 
 [[package]]
 name = "poem"
-version = "0.6.10"
+version = "1.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cbf729a580f7459110aff513a3368cd07c04b2759ec7121aa98d156bdf785bf3"
-dependencies = [
- "anyhow",
- "askama",
- "async-trait",
- "base64 0.13.0",
- "bytes 1.1.0",
- "cookie",
- "futures-util",
- "http",
- "hyper",
- "mime",
- "mime_guess",
- "nom 7.0.0",
- "once_cell",
- "parking_lot",
- "percent-encoding",
- "pin-project-lite",
- "poem-derive 0.6.10",
- "regex",
- "serde",
- "serde_json",
- "serde_urlencoded",
- "sha1",
- "smallvec",
- "thiserror",
- "tokio",
- "tokio-stream",
- "tokio-tungstenite",
- "tokio-util",
-]
-
-[[package]]
-name = "poem"
-version = "1.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b130c1920659bfe21ebea1a9968452780f61d0c6e15d70fd720afd20062bbfec"
+checksum = "ce1defacc357d1fcc2c3748f9743bc4e88e645977dcb15f765a067aa4bd94ade"
 dependencies = [
  "anyhow",
  "askama",
@@ -1568,7 +1553,7 @@ dependencies = [
  "parking_lot",
  "percent-encoding",
  "pin-project-lite",
- "poem-derive 1.0.0",
+ "poem-derive",
  "regex",
  "serde",
  "serde_json",
@@ -1580,28 +1565,16 @@ dependencies = [
  "time 0.2.27",
  "tokio",
  "tokio-stream",
+ "tokio-tungstenite",
  "tokio-util",
  "tracing",
 ]
 
 [[package]]
 name = "poem-derive"
-version = "0.6.10"
+version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "470f07c7e12bcf378a557c29f5f294dc3304aa0fff9c7c8df5f876a2a9f9e082"
-dependencies = [
- "darling 0.13.0",
- "proc-macro-crate",
- "proc-macro2",
- "quote",
- "syn",
-]
-
-[[package]]
-name = "poem-derive"
-version = "1.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b6562da0a5eec66651d1340973f490781fe7fa607888ebc3da277968208f1872"
+checksum = "2c3650060e471fc11fa9269fafcac0dc75810c98ce0ed2b035d4cbb89abb08b4"
 dependencies = [
  "darling 0.13.0",
  "proc-macro-crate",
@@ -1612,15 +1585,14 @@ dependencies = [
 
 [[package]]
 name = "poem-openapi"
-version = "1.0.0"
+version = "1.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b475883590a04c58ea6053a6cdad828bf0b939e9a3b7735a3b5833c31e055f3b"
+checksum = "24320ecba4d5e0adb7df85bdd72133803351560bcad6fe201301f05ecf2a9911"
 dependencies = [
- "askama",
  "base64 0.13.0",
  "derive_more",
  "num-traits",
- "poem 1.0.0",
+ "poem",
  "poem-openapi-derive",
  "regex",
  "serde",
@@ -1632,9 +1604,9 @@ dependencies = [
 
 [[package]]
 name = "poem-openapi-derive"
-version = "1.0.0"
+version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "67fc6fd078a0dc5487eb14653526d12146caab2b85bba68d930c78c0881473bb"
+checksum = "cf9d738db33356167bcfca4f5a6739a50f86c6c91b1bb25a28667046eb5e69d7"
 dependencies = [
  "Inflector",
  "darling 0.13.0",
@@ -1656,7 +1628,7 @@ dependencies = [
  "async-graphql-poem",
  "opentelemetry",
  "opentelemetry-jaeger",
- "poem 1.0.0",
+ "poem",
  "poem-openapi",
  "sea-orm",
  "tokio",
@@ -1699,7 +1671,20 @@ version = "0.4.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "18f33027081eba0a6d8aba6d1b1c3a3be58cbb12106341c2d5759fcd9b5277e7"
 dependencies = [
- "proc-macro-error-attr",
+ "proc-macro-error-attr 0.4.12",
+ "proc-macro2",
+ "quote",
+ "syn",
+ "version_check",
+]
+
+[[package]]
+name = "proc-macro-error"
+version = "1.0.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "da25490ff9892aab3fcf7c36f08cfb902dd3e71ca0f9f9517bea02a73a5ce38c"
+dependencies = [
+ "proc-macro-error-attr 1.0.4",
  "proc-macro2",
  "quote",
  "syn",
@@ -1716,6 +1701,17 @@ dependencies = [
  "quote",
  "syn",
  "syn-mid",
+ "version_check",
+]
+
+[[package]]
+name = "proc-macro-error-attr"
+version = "1.0.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a1be40180e52ecc98ad80b184934baf3d0d29f979574e439af5a55274b35f869"
+dependencies = [
+ "proc-macro2",
+ "quote",
  "version_check",
 ]
 
@@ -1826,15 +1822,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "regex-automata"
-version = "0.1.10"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6c230d73fb8d8c1b9c0b3135c5142a8acee3a0558fb8db5cf1cb65f8d7862132"
-dependencies = [
- "regex-syntax",
-]
-
-[[package]]
 name = "regex-syntax"
 version = "0.6.25"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1930,9 +1917,9 @@ dependencies = [
 
 [[package]]
 name = "sea-orm"
-version = "0.2.6"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c3c5c7f0848ed7ddb2b3956abc84d5167dd33bb34c43e3b69172f565ca657a11"
+checksum = "22e50474d23364b40084498a41079f343a10a6c8700aa469eacdfb4ba00a2177"
 dependencies = [
  "async-stream",
  "async-trait",
@@ -1940,6 +1927,7 @@ dependencies = [
  "futures",
  "futures-util",
  "log",
+ "ouroboros",
  "rust_decimal",
  "sea-orm-macros",
  "sea-query",
@@ -1947,17 +1935,17 @@ dependencies = [
  "serde",
  "serde_json",
  "sqlx",
+ "url",
  "uuid",
 ]
 
 [[package]]
 name = "sea-orm-macros"
-version = "0.2.6"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9466819cb0878e7fb6f6a1d7e46471a93b7121fef39db82f5799127884e39534"
+checksum = "ce39282dcace4fa8fca48e7cea9d767848c2a05a51b5df57241f4c52847b18e3"
 dependencies = [
  "bae",
- "convert_case",
  "heck",
  "proc-macro2",
  "quote",
@@ -1966,9 +1954,9 @@ dependencies = [
 
 [[package]]
 name = "sea-query"
-version = "0.17.0"
+version = "0.18.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c1db6d690760e4f48663f0ecd9d91b03c1e6a5b17991d1c53043c5f07ba7db29"
+checksum = "abb538b925899eb4b64767050dece7ed1aa2a0d9b1163958121eb6a308e0fe5f"
 dependencies = [
  "chrono",
  "rust_decimal",
@@ -2291,6 +2279,12 @@ dependencies = [
  "tokio",
  "tokio-rustls",
 ]
+
+[[package]]
+name = "stable_deref_trait"
+version = "1.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a8f112729512f8e442d81f95a8a7ddf2b7c6b8a1a6f509a95864142b30cab2d3"
 
 [[package]]
 name = "standback"
@@ -2687,9 +2681,9 @@ dependencies = [
 
 [[package]]
 name = "tracing-opentelemetry"
-version = "0.15.0"
+version = "0.16.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "599f388ecb26b28d9c1b2e4437ae019a7b336018b45ed911458cd9ebf91129f6"
+checksum = "3ffbf13a0f8b054a4e59df3a173b818e9c6177c02789871f2073977fd0062076"
 dependencies = [
  "opentelemetry",
  "tracing",
@@ -2699,35 +2693,17 @@ dependencies = [
 ]
 
 [[package]]
-name = "tracing-serde"
-version = "0.1.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fb65ea441fbb84f9f6748fd496cf7f63ec9af5bca94dd86456978d055e8eb28b"
-dependencies = [
- "serde",
- "tracing-core",
-]
-
-[[package]]
 name = "tracing-subscriber"
-version = "0.2.25"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0e0d2eaa99c3c2e41547cfa109e910a68ea03823cccad4a0525dcbc9b01e8c71"
+checksum = "5cf865b5ddc38e503a29c41c4843e616a73028ae18c637bc3eb2afaef4909c84"
 dependencies = [
  "ansi_term",
- "chrono",
- "lazy_static",
- "matchers",
- "regex",
- "serde",
- "serde_json",
  "sharded-slab",
  "smallvec",
  "thread_local",
- "tracing",
  "tracing-core",
  "tracing-log",
- "tracing-serde",
 ]
 
 [[package]]

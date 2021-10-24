@@ -1,7 +1,7 @@
 use async_graphql::{Error, Object, Result};
 use tracing::debug;
 
-use crate::models::todo::{get_todos, TodoDAO};
+use crate::models::todo::{self, get_todos};
 
 pub struct QueryRoot;
 
@@ -11,7 +11,7 @@ impl QueryRoot {
         String::from("pong")
     }
 
-    async fn todos(&self) -> Result<Vec<TodoDAO>> {
+    async fn todos(&self) -> Result<Vec<todo::Model>> {
         debug!("GraphQL todos handler");
         match get_todos().await {
             Ok(todos) => Ok(todos),

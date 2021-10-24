@@ -4,7 +4,7 @@ use poem_openapi::{
 };
 use tracing::debug;
 
-use crate::models::todo::{TodoDAO, get_todos};
+use crate::models::todo::{self, get_todos};
 
 // REST API
 
@@ -18,7 +18,7 @@ enum ApiTags {
 enum GetTodosResponse {
     /// Got all todos.
     #[oai(status = 200)]
-    Ok(Json<Vec<TodoDAO>>),
+    Ok(Json<Vec<todo::Model>>),
     /// Had database error.
     #[oai(status = 500)]
     DbError,
@@ -28,7 +28,7 @@ enum GetTodosResponse {
 enum GetTodoResponse {
     /// Got all todos.
     #[oai(status = 200)]
-    Ok(Json<TodoDAO>),
+    Ok(Json<todo::Model>),
     /// Had database error.
     #[oai(status = 500)]
     DbError,
@@ -54,7 +54,7 @@ impl TodoAPI {
     #[oai(path = "/todo-test", method = "get", tag = "ApiTags::Todo")]
     async fn todo(&self) -> GetTodoResponse {
         debug!("REST todos handler");
-        GetTodoResponse::Ok(Json(TodoDAO {
+        GetTodoResponse::Ok(Json(todo::Model {
             id: 1,
             name: "test".to_string(),
             description: None,

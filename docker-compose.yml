@@ -11,6 +11,15 @@ services:
       # UI
       - 16686:16686
 
+  # OpenAPI UI
+  redoc:
+    image: redocly/redoc
+    environment:
+      SPEC_URL: http://localhost:3000/spec 
+    ports:
+      - 8080:80
+
+
   # Postgres DB
   postgres:
     image: postgres

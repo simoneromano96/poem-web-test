@@ -6,7 +6,7 @@ use sea_orm::entity::prelude::*;
 
 use crate::functions::get_db::get_db;
 
-#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+#[derive(Clone, Debug, Eq, PartialEq, SimpleObject, Object, DeriveEntityModel)]
 #[sea_orm(table_name = "todo")]
 pub struct Model {
     #[sea_orm(primary_key)]
@@ -45,8 +45,9 @@ impl TodoDAO {
     }
 }
 
-pub async fn get_todos() -> Result<Vec<TodoDAO>, DbErr> {
+pub async fn get_todos() -> Result<Vec<Model>, DbErr> {
     let db = get_db().await;
     let todos: Vec<Model> = Entity::find().all(db).await?;
-    Ok(todos.into_iter().map(|todo| TodoDAO::from_model(todo)).collect())
+    Ok(todos)
+    // Ok(todos.into_iter().map(|todo| TodoDAO::from_model(todo)).collect())
 }
